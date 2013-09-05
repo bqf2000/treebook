@@ -19,6 +19,7 @@ class StatusesControllerTest < ActionController::TestCase
     assert_match /Blocked\ status/, response.body
   end
 
+
   test "should not display blocked user's posts when logged in" do
     sign_in users(:jason)
     users(:blocked_friend).statuses.create(content: 'Blocked status')
@@ -65,14 +66,14 @@ class StatusesControllerTest < ActionController::TestCase
 
     assert_redirected_to status_path(assigns(:status))
     assert_equal assigns(:status).user_id, users(:jason).id
-  end  
+  end
 
   test "should show status" do
     get :show, id: @status
     assert_response :success
   end
 
-  test "should redirect status edit when not logged in" do
+  test "should redirect edit when not logged in" do
     get :edit, id: @status
     assert_response :redirect
     assert_redirected_to new_user_session_path
@@ -110,7 +111,11 @@ class StatusesControllerTest < ActionController::TestCase
     assert_equal assigns(:status).user_id, users(:jason).id
   end
 
+
+
+
   test "should destroy status" do
+    sign_in users(:jason)
     assert_difference('Status.count', -1) do
       delete :destroy, id: @status
     end

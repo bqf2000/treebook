@@ -5,9 +5,9 @@ class UserFriendshipTest < ActiveSupport::TestCase
   should belong_to(:friend)
 
   test "that creating a friendship works without raising an exception" do
-  	assert_nothing_raised do
-  		UserFriendship.create user: users(:jason), friend: users(:mike)
-  	end
+    assert_nothing_raised do
+      UserFriendship.create user: users(:jason), friend: users(:mike)
+    end
   end
 
   test "that creating a friendship based on user id and friend id works" do
@@ -21,7 +21,7 @@ class UserFriendshipTest < ActiveSupport::TestCase
     end
 
     should "have a pending state" do
-      assert_equal "pending", @user_friendship.state
+      assert_equal 'pending', @user_friendship.state
     end
   end
 
@@ -37,7 +37,7 @@ class UserFriendshipTest < ActiveSupport::TestCase
     end
   end
 
-  context "#mutual_friendship" do 
+  context "#mutual_friendship" do
     setup do
       UserFriendship.request users(:jason), users(:jim)
       @friendship1 = users(:jason).user_friendships.where(friend_id: users(:jim).id).first
@@ -49,7 +49,7 @@ class UserFriendshipTest < ActiveSupport::TestCase
     end
   end
 
-  context "#accept_mutual_friendship!" do 
+  context "#accept_mutual_friendship!" do
     setup do
       UserFriendship.request users(:jason), users(:jim)
     end

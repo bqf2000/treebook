@@ -45,8 +45,8 @@ class UserFriendshipsController < ApplicationController
       @user_friendship = UserFriendship.request(current_user, @friend)
       respond_to do |format|
         if @user_friendship.new_record?
-          format.html do
-            flash[:error] = "There was a problem creating that friend request."
+          format.html do 
+            flash[:error] = "There was problem creating that friend request."
             redirect_to profile_path(@friend)
           end
           format.json { render json: @user_friendship.to_json, status: :precondition_failed }

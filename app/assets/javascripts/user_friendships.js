@@ -10,7 +10,7 @@ $(document).ready(function() {
     }
   });
 
-  $("#add-friendship").click(function(event) {
+  $('#add-friendship').click(function(event) {
     event.preventDefault();
     var addFriendshipBtn = $(this);
     $.ajax({

@@ -6,14 +6,14 @@ class UserFriendship < ActiveRecord::Base
 
   after_destroy :delete_mutual_friendship!
 
-  state_machine :state, initial: :pending do 
+  state_machine :state, initial: :pending do
     after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
     after_transition on: :block, do: [:block_mutual_friendship!]
 
     state :requested
     state :blocked
 
-    event :accept do 
+    event :accept do
       transition any => :accepted
     end
 
@@ -54,7 +54,8 @@ class UserFriendship < ActiveRecord::Base
   end
 
   def accept_mutual_friendship!
-    # Grab the mutual friendship and update the state without using the state machine so as not to invoke callbacks.
+    # Grab the mutal friendship and update the state without using
+    # the state machine so as not to invoke callbacks.
     mutual_friendship.update_attribute(:state, 'accepted')
   end
 
